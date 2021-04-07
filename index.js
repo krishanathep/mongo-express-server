@@ -32,8 +32,13 @@ app.get("/", (req, res) => {
   res.status(200).send("หน้าแรกของ api express");
 });
 
-var Post = require('./routes/post-route')
+// Posts api
+var Post = require('./routers/post-router')
 app.use('/api/posts', Post)
+
+// Foods api
+var Food = require('./routers/food-router')
+app.use('/api/foods', Food)
 
 app.use((req, res, next) => {
   var err = new Error("ไม่พบ path ที่คุณต้องการ");
