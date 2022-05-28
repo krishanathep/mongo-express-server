@@ -3,17 +3,20 @@ var cors = require("cors");
 var mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-var mongo_uri = "mongodb+srv://root:supervis@cluster0.05o3x.mongodb.net/MONGO-TEST?retryWrites=true&w=majority";
+var mongo_uri =
+  "mongodb+srv://admin:supervis@mongodb.zptdq.gcp.mongodb.net/reactdb?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
-mongoose.connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true }).then(
-  () => {
-    console.log("[success] task 2 : connected to the database ");
-  },
-  error => {
-    console.log("[failed] task 2 " + error);
-    process.exit();
-  }
-);
+mongoose
+  .connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(
+    () => {
+      console.log("[success] task 2 : connected to the database ");
+    },
+    (error) => {
+      console.log("[failed] task 2 " + error);
+      process.exit();
+    }
+  );
 
 var app = express();
 
@@ -33,12 +36,16 @@ app.get("/", (req, res) => {
 });
 
 // Posts api
-var Post = require('./routers/post-router')
-app.use('/api/posts', Post)
+var Post = require("./routers/post-router");
+app.use("/api/posts", Post);
 
 // Foods api
-var Food = require('./routers/food-router')
-app.use('/api/foods', Food)
+var Food = require("./routers/food-router");
+app.use("/api/foods", Food);
+
+// Attractions api
+var Attractions = require("./routers/attractions-router");
+app.use("/api/attractions", Attractions);
 
 app.use((req, res, next) => {
   var err = new Error("ไม่พบ path ที่คุณต้องการ");
