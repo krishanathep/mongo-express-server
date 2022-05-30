@@ -2,9 +2,9 @@ var express = require("express");
 var cors = require("cors");
 var mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const path = require('path')
 
-var mongo_uri =
-  "mongodb+srv://admin:supervis@mongodb.zptdq.gcp.mongodb.net/reactdb?retryWrites=true&w=majority";
+var mongo_uri = "mongodb+srv://admin:supervis@mongodb.zptdq.gcp.mongodb.net/reactdb?retryWrites=true&w=majority";
 mongoose.Promise = global.Promise;
 mongoose
   .connect(mongo_uri, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -32,7 +32,9 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).send("หน้าแรกของ api express");
+  //res.status(200).send("หน้าแรกของ api express");
+  res.status(200).sendFile(path.join(__dirname, '/index.html'));
+  
 });
 
 // Posts api
